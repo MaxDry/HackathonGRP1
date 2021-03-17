@@ -4,5 +4,8 @@ $primary-color: #333;
 body {
   font: 100% $font-stack;
   color: $primary-color;
-  background-color: red;
 }
+
+
+// Partials
+@import './_pages/home';
