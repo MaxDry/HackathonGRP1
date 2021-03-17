@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New TrainingMeasure{% endblock %}
+
+{% block body %}
+    <h1>Create new TrainingMeasure</h1>
+
+    {{ include('admin/training_measure/_form.html.twig') }}
+
+    <a href="{{ path('admin_training_measure_index') }}">back to list</a>
+{% endblock %}

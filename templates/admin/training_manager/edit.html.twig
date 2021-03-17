@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit TrainingManager{% endblock %}
+
+{% block body %}
+    <h1>Edit TrainingManager</h1>
+
+    {{ include('admin/training_manager/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('admin_training_manager_index') }}">back to list</a>
+
+    {{ include('admin/training_manager/_delete_form.html.twig') }}
+{% endblock %}

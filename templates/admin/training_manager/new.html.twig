@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New TrainingManager{% endblock %}
+
+{% block body %}
+    <h1>Create new TrainingManager</h1>
+
+    {{ include('admin/training_manager/_form.html.twig') }}
+
+    <a href="{{ path('admin_training_manager_index') }}">back to list</a>
+{% endblock %}
