@@ -29,6 +29,13 @@ class Profile
             'ROLE_PROFILE_EDIT',
             'ROLE_PROFILE_DELETE',
         ],
+        'formation' => [
+            'ROLE_FORMATION',
+            'ROLE_FORMATION_SHOW',
+            'ROLE_FORMATION_NEW',
+            'ROLE_FORMATION_EDIT',
+            'ROLE_FORMATION_DELETE',
+        ],
         'trainingManager' => [
             'ROLE_TRAINING_MANAGER',
             'ROLE_TRAINING_MANAGER_SHOW',

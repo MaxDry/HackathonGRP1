@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Repository\FormationRepository;
+use App\Repository\TeamRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,9 +10,9 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Gedmo\Blameable\Traits\BlameableEntity;
 
 /**
- * @ORM\Entity(repositoryClass=FormationRepository::class)
+ * @ORM\Entity(repositoryClass=TeamRepository::class)
  */
-class Formation
+class Team
 {
     /**
      * @ORM\Id
@@ -29,22 +29,17 @@ class Formation
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $catalog_link;
+    private $picture;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\OneToMany(targetEntity=TrainingManager::class, mappedBy="team")
      */
-    private $eLearning_link;
+    private $trainingManagers;
 
     /**
      * @ORM\Column(type="boolean")
      */
     private $is_active;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=TrainingManager::class, mappedBy="formations")
-     */
-    private $trainingManagers;
 
     public function __construct()
     {
@@ -71,38 +66,14 @@ class Formation
         return $this;
     }
 
-    public function getCatalogLink(): ?string
+    public function getPicture(): ?string
     {
-        return $this->catalog_link;
+        return $this->picture;
     }
 
-    public function setCatalogLink(?string $catalog_link): self
+    public function setPicture(?string $picture): self
     {
-        $this->catalog_link = $catalog_link;
-
-        return $this;
-    }
-
-    public function getELearningLink(): ?string
-    {
-        return $this->eLearning_link;
-    }
-
-    public function setELearningLink(?string $eLearning_link): self
-    {
-        $this->eLearning_link = $eLearning_link;
-
-        return $this;
-    }
-
-    public function getIsActive(): ?bool
-    {
-        return $this->is_active;
-    }
-
-    public function setIsActive(bool $is_active): self
-    {
-        $this->is_active = $is_active;
+        $this->picture = $picture;
 
         return $this;
     }
@@ -119,7 +90,7 @@ class Formation
     {
         if (!$this->trainingManagers->contains($trainingManager)) {
             $this->trainingManagers[] = $trainingManager;
-            $trainingManager->addFormation($this);
+            $trainingManager->setTeam($this);
         }
 
         return $this;
@@ -128,8 +99,28 @@ class Formation
     public function removeTrainingManager(TrainingManager $trainingManager): self
     {
         if ($this->trainingManagers->removeElement($trainingManager)) {
-            $trainingManager->removeFormation($this);
+            // set the owning side to null (unless already changed)
+            if ($trainingManager->getTeam() === $this) {
+                $trainingManager->setTeam(null);
+            }
         }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+       return $this->name;
+    }
+
+    public function getIsActive(): ?bool
+    {
+        return $this->is_active;
+    }
+
+    public function setIsActive(bool $is_active): self
+    {
+        $this->is_active = $is_active;
 
         return $this;
     }

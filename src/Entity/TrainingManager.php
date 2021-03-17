@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TrainingManagerRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Gedmo\Blameable\Traits\BlameableEntity;
@@ -38,6 +40,26 @@ class TrainingManager
      * @ORM\Column(type="boolean")
      */
     private $is_active;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="trainingManagers")
+     */
+    private $team;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=City::class, inversedBy="trainingManagers")
+     */
+    private $city;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Formation::class, inversedBy="trainingManagers")
+     */
+    private $formations;
+
+    public function __construct()
+    {
+        $this->formations = new ArrayCollection();
+    }
 
     use TimestampableEntity;
     use BlameableEntity;
@@ -93,5 +115,58 @@ class TrainingManager
         $this->is_active = $is_active;
 
         return $this;
+    }
+
+    public function getTeam(): ?Team
+    {
+        return $this->team;
+    }
+
+    public function setTeam(?Team $team): self
+    {
+        $this->team = $team;
+
+        return $this;
+    }
+
+    public function getCity(): ?City
+    {
+        return $this->city;
+    }
+
+    public function setCity(?City $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Formation[]
+     */
+    public function getFormations(): Collection
+    {
+        return $this->formations;
+    }
+
+    public function addFormation(Formation $formation): self
+    {
+        if (!$this->formations->contains($formation)) {
+            $this->formations[] = $formation;
+        }
+
+        return $this;
+    }
+
+    public function removeFormation(Formation $formation): self
+    {
+        $this->formations->removeElement($formation);
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+       return $this->label;
     }
 }

@@ -4,8 +4,9 @@ namespace App\DataFixtures;
 
 use App\Entity\TrainingManager;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class TrainingManagerFixtures extends BaseFixtures
+class TrainingManagerFixtures extends BaseFixtures implements DependentFixtureInterface
 {
 
     /**
@@ -21,12 +22,13 @@ class TrainingManagerFixtures extends BaseFixtures
             $trainingManager->setFirstName($this->faker->firstName());
             $trainingManager->setLastName($this->faker->lastName());
             $trainingManager->setIsActive($this->faker->boolean());
+            $trainingManager->setCity($this->getRandomReference("City"));
+            $trainingManager->setTeam($this->getRandomReference("Team"));
+            $trainingManager->addFormation($this->getRandomReference("Formation"));
 
             return $trainingManager;
 
         });
-
-        
         $manager->flush();
     }
 
@@ -36,7 +38,9 @@ class TrainingManagerFixtures extends BaseFixtures
     public function getDependencies()
     {
         return [
-            ProfileFixtures::class,
+            FormationFixtures::class,
+            CityFixtures::class,
+            TeamFixtures::class,
         ];
     }
 }
