@@ -46,3 +46,7 @@ input,select {
 @import "./_components/select";
 @import "./_components/switch";
 @import "./_components/forms";
+
+// Partials
+@import './_pages/home';
+@import './_pages/formation';
