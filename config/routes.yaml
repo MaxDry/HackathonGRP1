@@ -1,3 +1,24 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+homepage:
+    path: /
+    controller: App\Controller\Front\HomeController::home
+
+formation:
+    path: /formation
+    controller: App\Controller\Front\FormationController::formation
+
+ressource:
+    path: /ressource
+    controller: App\Controller\Front\ressourceController::ressource
+
+
+formateur:
+    path: /formateur
+    controller: App\Controller\Front\FormateurController::formateur
+
+aide:
+    path: /aide
+    controller: App\Controller\Front\AideController::aide
