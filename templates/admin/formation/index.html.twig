@@ -1,49 +1,48 @@
-{% extends 'base.html.twig' %}
+{% extends './admin/base.html.twig' %}
 
-{% block title %}Formation index{% endblock %}
+{% block title %}Formations{% endblock %}
 
 {% block body %}
-    <h1>Formation index</h1>
+    <h1>Formations</h1>
 
-    <table class="table">
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Catalog_link</th>
-                <th>ELearning_link</th>
-                <th>Is_active</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>CreatedBy</th>
-                <th>UpdatedBy</th>
-                <th>actions</th>
+            <th scope="col">Id</th>
+            <th scope="col">Intitulé</th>
+            <th scope="col">Lien du catalogue</th>
+            <th scope="col">Lien e-Learning</th>
+            <th scope="col">Status</th>
+            <th scope="col">Date de création</th>
+            <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for formation in formations %}
-            <tr>
-                <td>{{ formation.id }}</td>
-                <td>{{ formation.name }}</td>
-                <td>{{ formation.catalogLink }}</td>
-                <td>{{ formation.eLearningLink }}</td>
-                <td>{{ formation.isActive ? 'Yes' : 'No' }}</td>
-                <td>{{ formation.createdAt ? formation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ formation.updatedAt ? formation.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ formation.createdBy }}</td>
-                <td>{{ formation.updatedBy }}</td>
-                <td>
-                    <a href="{{ path('admin_formation_show', {'id': formation.id}) }}">show</a>
-                    <a href="{{ path('admin_formation_edit', {'id': formation.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="10">no records found</td>
-            </tr>
-        {% endfor %}
+            {% for formation in formations %}
+                <tr>
+                    <td scope="row">{{ formation.id }}</td>
+                    <td>{{ formation.name }}</td>
+                    <td>{{ formation.catalogLink|slice(0, 30) }}...</td>
+                    <td>{{ formation.eLearningLink|slice(0, 30) }}...</td>
+                    <td>
+                        {{ formation.isActive ? 'Actif' : 'Inactif' }}
+                    </td>
+                    <td>{{ formation.createdAt ? formation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>
+                        <a class="btn btn-primary" href="{{ path('admin_formation_show', {'slug': formation.slug}) }}" role="button">Voir</a>
+                        <a class="btn btn-primary" href="{{ path('admin_formation_edit', {'slug': formation.slug}) }}" role="button">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="11">no records found</td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
+  <div class="d-flex justify-content-center">
+    {{ knp_pagination_render(formations) }}
+  </div>
 
-    <a href="{{ path('admin_formation_new') }}">Create new</a>
+    <a class="btn btn-primary" href="{{ path('admin_formation_new') }} " role="button">Ajouter une formation</a>
 {% endblock %}

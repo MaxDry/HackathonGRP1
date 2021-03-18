@@ -1,13 +1,13 @@
-{% extends 'base.html.twig' %}
+{% extends './admin/base.html.twig' %}
 
-{% block title %}Edit Formation{% endblock %}
+{% block title %}Modification d'une formation{% endblock %}
 
 {% block body %}
-    <h1>Edit Formation</h1>
+    <h1>Modification d'une formation</h1>
 
     {{ include('admin/formation/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('admin_formation_index') }}">back to list</a>
+    <a class="btn btn-secondary" href="{{ path('admin_formation_index') }}" role="button">Retour</a>
 
     {{ include('admin/formation/_delete_form.html.twig') }}
 {% endblock %}

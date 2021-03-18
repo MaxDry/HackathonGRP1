@@ -6,6 +6,7 @@ use App\Repository\FormationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Gedmo\Blameable\Traits\BlameableEntity;
 
@@ -45,6 +46,12 @@ class Formation
      * @ORM\ManyToMany(targetEntity=TrainingManager::class, mappedBy="formations")
      */
     private $trainingManagers;
+
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(type="string", unique=true)
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -130,6 +137,18 @@ class Formation
         if ($this->trainingManagers->removeElement($trainingManager)) {
             $trainingManager->removeFormation($this);
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
