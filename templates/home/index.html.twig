@@ -4,151 +4,60 @@
 {% endblock %}
 
 {% block body %}
-{% include 'home/menu.html.twig' %}
-
 {# epace #}
-
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/assets/styles/app.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="icon" type="image/png" href="images/bloc-marque-minint_large.png" />
-  </head>
-
-      <style>
-        #bloc-presentation{
-            display: flex;
-            width: 100%;
-            background-color: #F5F5F5;
-            padding: 100px;
-        }
-
-        .col1 {
-            margin : 15px;
-            padding : 45px;
-            width: 50%;
-        }
-
-        .col2 {
-            margin : 15px;
-            padding : 45px;
-        }
-
-        #bloc-video {
-            background-color: #F5F5F5;
-        }
-
-        .contenu-video {
-            text-align: center;
-            color: #000000;
-            padding: 130px;
-            border: 0.5px solid;
-            font-style: normal;
-            font-weight: bold;
-            font-size: 25px;
-            line-height: 10px;
-        }
-
-        #bloc-actualites {
-            padding: 80px;
-        }
-
-        .card{
-            background: #F5F5F5;
-            border-radius: 30px;
-        }
-
-        #bloc-chiffre {
-            padding: 80px;   
-            text-align: center;
-        }
-
-       .chiffre-card {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-        
-        #contact {
-            margin: 50px;
-        }
-
-        footer {
-          background-color: #C4C4C4;
-        }
-
-    </style>
 
 <body>
   <section id="bloc-presentation">
-    <div class="row">
-      <div class="col1">
-      <h4>
-        Organisation de la formation au sein du Ministère des Armées
-      </h4>
-      <p>
-          La formation professionnelle est un droit dont dispose les agents publics afin d’évoluer professionnellement, de renforcer leurs compétences et d’envisager une reconversion professionnelle.
-      </p>
-          <button type="button" class="btn btn-secondary btn-sm ml-4 mt-1">Notre aide en ligne</button>
-      </div>
-      <div class="col2">
-          Vidéo +filtre de couleur/Image 
-      </div>
+     <div class="colonne-gauche">
+      <span class="titre-presentation"> Organisation de la formation au sein du Ministère des Armées </span>
+       <p class="texte-presentation"> La formation professionnelle est un droit dont dispose les agents publics afin d’évoluer professionnellement, de renforcer leurs compétences et d’envisager une reconversion professionnelle. </p>
+        <button class="btn-presentation" onclick="window.location.href = '#';">Nos formations</button>
+     </div>
     </div>
-  </section>
-
-  <section id="bloc-video">
-    <p class="contenu-video">
-      Vidéo explicative
-    </p>
   </section>
 
   <section id="bloc-actualites">
      <div class="text-center pb-5"><h4> les actualitées </h4></div>
     <div class="card-deck">
       <div class="card">
-        <img src="https://www.jaipuriaschoolpatna.in/wp-content/uploads/2016/11/blank-img.jpg" alt="Card image cap" style="border-radius: 30px 30px 0 0">
+        <img src="https://www.jaipuriaschoolpatna.in/wp-content/uploads/2016/11/blank-img.jpg" alt="Card image cap">
         <div class="card-body">
           <p> mots clés </p>
           <h5 class="card-title">Titre</h5>
           <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet...</p>
         </div>
-        <div class="card-footer" style="border-radius: 0 0 30px 30px">
+        <div class="card-footer">
           <small class="text-muted">Publier par Nom Prénom</small>
           <small class="text"> Le 22 Jan 2021</small>
         </div>
     </div>
     <div class="card">
-        <img src="https://www.jaipuriaschoolpatna.in/wp-content/uploads/2016/11/blank-img.jpg" alt="Card image cap" style="border-radius: 30px 30px 0 0">
+        <img src="https://www.jaipuriaschoolpatna.in/wp-content/uploads/2016/11/blank-img.jpg" alt="Card image cap">
         <div class="card-body">
           <p> mots clés </p>
           <h5 class="card-title">Titre</h5>
           <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet...</p>
         </div>
-        <div class="card-footer" style="border-radius: 0 0 30px 30px">
+        <div class="card-footer">
           <small class="text-muted">Publier par Nom Prénom</small>
           <small class="text"> Le 22 Jan 2021</small>
         </div>
     </div>
     <div class="card">
-        <img src="https://www.jaipuriaschoolpatna.in/wp-content/uploads/2016/11/blank-img.jpg" alt="Card image cap" style="border-radius: 30px 30px 0 0">
+        <img src="https://www.jaipuriaschoolpatna.in/wp-content/uploads/2016/11/blank-img.jpg" alt="Card image cap">
         <div class="card-body">
           <p> mots clés </p>
           <h5 class="card-title">Titre</h5>
           <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet...</p>
         </div>
-        <div class="card-footer" style="border-radius: 0 0 30px 30px">
+        <div class="card-footer">
           <small class="text-muted">Publier par Nom Prénom</small>
           <small class="text"> Le 22 Jan 2021</small>
         </div>
         </div>
       </div>
       <div class="text-center">
-        <a href="#" class="btn btn-light btn-lg active mt-5 pl-4 pr-4" role="button" aria-pressed="true"> plus --> </a>
+        <button class="btn-actualite" onclick="window.location.href = '#';"> Plus</button>
       </div>
   </section>
 
@@ -159,22 +68,22 @@
     <div class="card">
       <div class="card-body">
         <h3 class="card-title">120 000</h3>
-        <h4 class="card-text">Titre</h4>
+        <h4 class="card-titre">Titre</h4>
         <p class="card-text pt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet...</p>
       </div>
     </div>
     <div class="card">
       <div class="card-body">
         <h3 class="card-title">90</h3>
-        <h4 class="card-text">Titre</h4>
+        <h4 class="card-titre">Titre</h4>
         <p class="card-text pt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet...</p>
       </div>
     </div>
     <div class="card">
       <div class="card-body">
         <h3 class="card-title">50 000</h3>
-        <h4 class="card-text">Titre</h4>
-        <p class="card-text pt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet...</p>
+        <h4 class="card-titre">Titre</h4>
+        <p class="card-text pt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet...</p>
       </div>
     </div>
     </div>
@@ -188,62 +97,34 @@
   </div>
   </section>
 
-  {% include 'home/annuaire.html.twig' %}
+     {# {% include 'home/annuaire.html.twig' %} #}
 
   <section id="contact">
-    <div class="text-center pb-5">
+    <div class="text-center mb-5">
          <h4> Contact </h4>
+          <span class="text-contact">Un probléme ? Une question ? Contactez-nous</span>
     </div>
     <form>
       <div class="form-row">
         <div class="form-group col-md-6">
-          <label for="inputEmail4">Email</label>
-          <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+          <input type="text" class="form-control" id="inputName" placeholder="Nom">
         </div>
         <div class="form-group col-md-6">
-          <label for="inputPassword4">Password</label>
-          <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+          <input type="text" class="form-control" id="inputName" placeholder="Prénom">
         </div>
       </div>
       <div class="form-group">
-        <label for="inputAddress">Address</label>
-        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+        <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
       </div>
       <div class="form-group">
-        <label for="inputAddress2">Address 2</label>
-        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+        <textarea type="text" id="message" name="message" class="form-control md-textarea" placeholder="Message"></textarea>
       </div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="inputCity">City</label>
-          <input type="text" class="form-control" id="inputCity">
-        </div>
-        <div class="form-group col-md-4">
-          <label for="inputState">State</label>
-          <select id="inputState" class="form-control">
-            <option selected>Choose...</option>
-            <option>...</option>
-          </select>
-        </div>
-        <div class="form-group col-md-2">
-          <label for="inputZip">Zip</label>
-          <input type="text" class="form-control" id="inputZip">
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="gridCheck">
-          <label class="form-check-label" for="gridCheck">
-            Check me out
-          </label>
-        </div>
       </div>
       <button type="submit" class="btn btn-primary">Sign in</button>
     </form>
   </section>
-  
-  <footer>
-  </footer>
+
+    {% include 'navigation/footer.html.twig' %}
 
 </body>
 </html>

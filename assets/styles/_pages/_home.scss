@@ -1,0 +1,268 @@
+@font-face{
+    font-family: Marianne-Regular;
+    src: url(../Marianne/._Marianne-Regular.ttf);
+
+    font-family: Marianne-Light_Italic;
+    src: url(../Marianne/._Marianne-Light_Italic.ttf);
+
+    font-family: Marianne-Light;
+    src: url(../Marianne/._Marianne-Light.ttf);
+}
+
+body {
+    background-color: rgb(255, 255, 255);
+  }
+
+h4{ 
+    color: #000091;
+}
+
+#bloc-presentation {
+    background: url(/assets/images/image-home.png), linear-gradient(145deg, rgba(255, 255, 255, 0) 50%, rgba(0, 0, 150, 3) 100%);
+    padding: 100px;
+}
+
+.colonne-gauche {
+    margin : 100px;
+    width: 60%;
+}
+
+.titre-presentation {
+    font-size: 30px;
+    color: #000091;
+    font-weight: 600;
+}
+
+.texte-presentation {
+    margin-top: 15px;
+    font-size: 16px;
+    color: #000000;
+    font-weight: 500;
+}
+
+.btn-presentation {
+    font-style: normal;
+    font-weight: bold;
+    padding: 5px;
+    margin: 10px;
+    font-size: 18px;
+    line-height: 25px;
+    text-align: center;
+    color: #000091;
+    background: transparent;
+    border-color: #000091;
+    border-radius: 5px;
+}
+
+#bloc-actualites {
+    padding: 80px;
+}
+
+.card {
+    margin: 10px;
+}
+
+.card-body {
+    border-radius: 30px;
+}
+
+.btn-actualite {
+    font-style: normal;
+    font-weight: bold;
+    padding: 13px;
+    margin: 13px;
+    font-size: 18px;
+    line-height: 15px;
+    text-align: center;
+    color: #000091;
+    background: transparent;
+    border-color: #000091;
+    border-radius: 5px;
+}
+
+#bloc-chiffre {
+    padding: 80px;   
+    text-align: center;
+}
+
+.chiffre-card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.card-title {
+    color: #000091;
+}
+
+#contact {
+    text-align: center;
+    padding: 100px;
+    background: #5771be4f;
+}
+
+.text-contact {
+    color: #000091;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 70px;
+}
+
+#intro-formation {
+    background: url(/assets/images/image-formation.png), linear-gradient(145deg, rgba(255, 255, 255, 0) 50%, rgba(0, 0, 150, 3) 100%);
+    padding: 95px;
+}
+
+.titre-formation {
+    text-align: center;
+    color: #000091;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 70px;
+    display: block;
+}
+
+#bloc-dispositif {
+    padding: 100px;
+    text-align: center;
+}
+
+.titre-dispositif {
+    color: #000091;
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 45px;
+}
+
+.texte-dispositif {
+    margin: auto;
+}
+
+.cards-dispositif {
+    padding-top: 35px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    align-items: center;
+ }
+
+.card-dispositif {
+    padding: 100px;
+    text-align: center;
+    flex: 0 0 300px;
+    margin: 15px;
+    border: 1px solid #000091;
+    border-radius: 10px;
+    transition: all .2s;
+ }
+
+.card-dispositif:hover {
+    padding: 9.5px;
+    text-align: center;
+    flex: 0 0 300px;
+    margin: 15px;
+    background-color: #000091;
+    border-radius: 10px;
+ }
+
+.texte-base {
+    font-size: 20px;
+    color: #000091;
+    font-weight: 500;
+ }
+
+.texte-hover {    
+    display:none;
+    color: white;
+    display:inherit;
+    position: relative;
+ }
+
+.card-dispositif .texte-hover, .card-dispositif:hover .texte-base {
+    display : none;
+}
+
+.card-dispositif:hover .texte-hover {
+    display : block;
+}
+
+.en-savoir-plus {
+    margin-top: 80px;
+    text-align: center;
+}
+
+#catalogue-formation {
+    margin-top: 150px;
+    padding: 20px;
+}
+
+.recherche-formation{
+    padding: 50px;
+    box-sizing: border-box;
+}
+
+.plus-info {
+    background-color: #000091;
+    text-align: center;
+    padding: 50px;
+}
+
+.texte-plus-info {
+    color: white;
+    font-size: 25px;
+}
+
+.email-plus-info {
+    margin-top: 35px;
+}
+
+#intro-formateur {
+    background: url(/assets/images/image-formateur.png), linear-gradient(145deg, rgba(255, 255, 255, 0) 50%, rgba(0, 0, 150, 3) 100%);
+    padding: 95px;
+}
+
+.texte-formateur {
+    padding: 70px;
+    margin-top: 60px;
+    text-align: center;
+}
+
+#parcours-de-formation {
+    padding: 5px;
+}
+
+#depot-candidature {
+    padding: 50px;
+    background: rgba(87, 112, 190, 0.25);
+}
+
+#conteneur {
+    flex-wrap: wrap;
+    padding: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.element{
+    margin: 15px;
+    background-color: rgba(87, 112, 190, 0.25);
+    border-radius: 10px;
+}
+
+.Vector {
+    position: absolute;
+    left: 10.35%;
+    right: 66.86%;
+    top: 57.37%;
+    bottom: 2.09%;
+}
+
+.aide-en-ligne {
+    padding: 95px;
+    background: rgba(87, 112, 190, 0.1);
+    text-align: center;
+}
+
+footer {
+  background-color: #C4C4C4;
+}

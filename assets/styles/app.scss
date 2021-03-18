@@ -5,3 +5,8 @@ body {
   font: 100% $font-stack;
   color: $primary-color;
 }
+
+
+// Partials
+@import './_pages/home';
+@import './_pages/formation';
