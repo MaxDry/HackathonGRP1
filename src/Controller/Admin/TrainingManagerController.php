@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/training/manager")
@@ -18,12 +19,20 @@ class TrainingManagerController extends AbstractController
     /**
      * @Route("/", name="training_manager_index", methods={"GET"})
      */
-    public function index(TrainingManagerRepository $trainingManagerRepository): Response
+    public function index(Request $request, PaginatorInterface $paginator, TrainingManagerRepository $trainingManagerRepository): Response
     {
         $this->denyAccessUnlessGranted('list', new TrainingManager());
 
+        $training_managers = $trainingManagerRepository->findAll();
+
+        $training_managersPaginate = $paginator->paginate(
+            $training_managers,
+            $request->query->getInt('page', 1),
+            6
+        );
+
         return $this->render('admin/training_manager/index.html.twig', [
-            'training_managers' => $trainingManagerRepository->findAll(),
+            'training_managers' => $training_managersPaginate,
         ]);
     }
 
@@ -54,7 +63,7 @@ class TrainingManagerController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="training_manager_show", methods={"GET"})
+     * @Route("/{slug}", name="training_manager_show", methods={"GET"})
      */
     public function show(TrainingManager $trainingManager): Response
     {
@@ -66,7 +75,7 @@ class TrainingManagerController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="training_manager_edit", methods={"GET","POST"})
+     * @Route("/{slug}/edit", name="training_manager_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, TrainingManager $trainingManager): Response
     {

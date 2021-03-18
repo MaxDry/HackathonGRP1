@@ -12,35 +12,35 @@
                 <td>{{ formation.id }}</td>
             </tr>
             <tr>
-                <th>Name</th>
+                <th>Intitulé</th>
                 <td>{{ formation.name }}</td>
             </tr>
             <tr>
-                <th>Catalog_link</th>
+                <th>Lien du catalogue</th>
                 <td>{{ formation.catalogLink }}</td>
             </tr>
             <tr>
-                <th>ELearning_link</th>
+                <th>Lien E-Learning</th>
                 <td>{{ formation.eLearningLink }}</td>
             </tr>
             <tr>
-                <th>Is_active</th>
+                <th>Status</th>
                 <td>{{ formation.isActive ? 'Yes' : 'No' }}</td>
             </tr>
             <tr>
-                <th>CreatedAt</th>
+                <th>Créé le</th>
                 <td>{{ formation.createdAt ? formation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>UpdatedAt</th>
+                <th>Modifié le</th>
                 <td>{{ formation.updatedAt ? formation.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>CreatedBy</th>
+                <th>Créé par</th>
                 <td>{{ formation.createdBy }}</td>
             </tr>
             <tr>
-                <th>UpdatedBy</th>
+                <th>Modifié par</th>
                 <td>{{ formation.updatedBy }}</td>
             </tr>
         </tbody>

@@ -6,6 +6,7 @@ use App\Repository\TrainingManagerRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Gedmo\Blameable\Traits\BlameableEntity;
 
@@ -55,6 +56,12 @@ class TrainingManager
      * @ORM\ManyToMany(targetEntity=Formation::class, inversedBy="trainingManagers")
      */
     private $formations;
+
+    /**
+     * @Gedmo\Slug(fields={"first_name"})
+     * @ORM\Column(type="string", unique=true)
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -168,5 +175,17 @@ class TrainingManager
     public function __toString()
     {
        return $this->label;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 }

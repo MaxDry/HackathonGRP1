@@ -3,47 +3,48 @@
 {% block title %}Utilisateurs{% endblock %}
 
 {% block body %}
-<h1>Utilisateurs</h1>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">Id</th>
-      <th scope="col">Email</th>
-      <th scope="col">Prénom</th>
-      <th scope="col">Nom</th>
-      <th scope="col">Status</th>
-      <th scope="col">Profile</th>
-      <th scope="col">Date de création</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for user in users %}
-        <tr>
-            <td scope="row">{{ user.id }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.firstName }}</td>
-            <td>{{ user.lastName }}</td>
-            <td>{{ user.profile }}</td>
-            <td>
-                {{ user.isActive ? 'Actif' : 'Inactif' }}
-            </td>
-            <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            <td>
-                <a class="btn btn-primary" href="{{ path('admin_user_show', {'slug': user.slug}) }}" role="button">Voir</a>
-                <a class="btn btn-primary" href="{{ path('admin_user_edit', {'slug': user.slug}) }}" role="button">Modifier</a>
-            </td>
-        </tr>
-    {% else %}
-        <tr>
-            <td colspan="11">no records found</td>
-        </tr>
-    {% endfor %}
-  </tbody>
-</table>
-<div class="d-flex justify-content-center">
-  {{ knp_pagination_render(users) }}
-</div>
+  <h1>Utilisateurs</h1>
 
-<a class="btn btn-primary" href="{{ path('admin_user_new') }}" role="button">Ajouter un Utilisateur</a>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Email</th>
+        <th scope="col">Prénom</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Status</th>
+        <th scope="col">Profile</th>
+        <th scope="col">Date de création</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+          <tr>
+              <td scope="row">{{ user.id }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.firstName }}</td>
+              <td>{{ user.lastName }}</td>
+              <td>{{ user.profile }}</td>
+              <td>
+                  {{ user.isActive ? 'Actif' : 'Inactif' }}
+              </td>
+              <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+              <td>
+                  <a class="btn btn-primary" href="{{ path('admin_user_show', {'slug': user.slug}) }}" role="button">Voir</a>
+                  <a class="btn btn-primary" href="{{ path('admin_user_edit', {'slug': user.slug}) }}" role="button">Modifier</a>
+              </td>
+          </tr>
+      {% else %}
+          <tr>
+              <td colspan="11">Aucun enregistrement</td>
+          </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-center">
+    {{ knp_pagination_render(users) }}
+  </div>
+
+  <a class="btn btn-primary" href="{{ path('admin_user_new') }}" role="button">Ajouter un Utilisateur</a>
 {% endblock %}

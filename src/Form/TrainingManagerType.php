@@ -6,6 +6,9 @@ use App\Entity\TrainingManager;
 use App\Entity\Team;
 use App\Entity\City;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use App\Repository\TrainingManagerRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,10 +25,22 @@ class TrainingManagerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('first_name')
-            ->add('last_name')
-            ->add('email')
-            ->add('is_active')
+            ->add('first_name', TextType::class, [
+                'required' => true,
+                'label' => 'Prénom',
+            ])
+            ->add('last_name', TextType::class, [
+                'required' => true,
+                'label' => 'Nom',
+            ])
+            ->add('email', EmailType::class, [
+                'required' => true,
+                'label' => 'Email',
+            ])
+            ->add('is_active', CheckboxType::class, [
+                'required' => false,
+                'label' => 'Actif',
+            ])
             ->add('team', EntityType::class, [
                 'class' => Team::class,
                 'label' => 'Équipe',

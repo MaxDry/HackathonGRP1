@@ -4,7 +4,9 @@ namespace App\Entity;
 
 use App\Repository\TrainingMeasureRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Blameable\Traits\BlameableEntity;
 
 /**
@@ -21,6 +23,13 @@ class TrainingMeasure
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le prénom ne peut pas être vide")
+     * @Assert\Length(
+     *    min = 2,
+     *    max = 50,
+     *    minMessage = "L'intitulé' doit faire au moins 2 caractères",
+     *    maxMessage = "L'intitulé doit faire au maximum 50 caractères",
+     * )
      */
     private $name;
 
@@ -28,6 +37,12 @@ class TrainingMeasure
      * @ORM\Column(type="boolean")
      */
     private $is_active;
+
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(type="string", unique=true)
+     */
+    private $slug;
 
     use TimestampableEntity;
     use BlameableEntity;
@@ -57,6 +72,18 @@ class TrainingMeasure
     public function setIsActive(bool $is_active): self
     {
         $this->is_active = $is_active;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

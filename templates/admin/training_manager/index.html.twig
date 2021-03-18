@@ -1,49 +1,50 @@
 {% extends './admin/base.html.twig' %}
 
-{% block title %}TrainingManager index{% endblock %}
+{% block title %}Responsables de formation{% endblock %}
 
 {% block body %}
-    <h1>TrainingManager index</h1>
+    <h1>Responsables de formation</h1>
 
-    <table class="table">
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>First_name</th>
-                <th>Last_name</th>
-                <th>Email</th>
-                <th>Is_active</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>CreatedBy</th>
-                <th>UpdatedBy</th>
-                <th>actions</th>
+                <th scope="col">Id</th>
+                <th scope="col">Prénom</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Email</th>
+                <th scope="col">Équipe</th>
+                <th scope="col">Localisation</th>
+                <th scope="col">Status</th>
+                <th scope="col">Créé le</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for training_manager in training_managers %}
             <tr>
-                <td>{{ training_manager.id }}</td>
+                <td scope="row">{{ training_manager.id }}</td>
                 <td>{{ training_manager.firstName }}</td>
                 <td>{{ training_manager.lastName }}</td>
                 <td>{{ training_manager.email }}</td>
-                <td>{{ training_manager.isActive ? 'Yes' : 'No' }}</td>
+                <td>{{ training_manager.team }}</td>
+                <td>{{ training_manager.city }}</td>
+                <td>{{ training_manager.isActive ? 'Actif' : 'Inactif' }}</td>
                 <td>{{ training_manager.createdAt ? training_manager.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ training_manager.updatedAt ? training_manager.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ training_manager.createdBy }}</td>
-                <td>{{ training_manager.updatedBy }}</td>
                 <td>
-                    <a href="{{ path('admin_training_manager_show', {'id': training_manager.id}) }}">show</a>
-                    <a href="{{ path('admin_training_manager_edit', {'id': training_manager.id}) }}">edit</a>
+                    <a class="btn btn-primary" role="button" href="{{ path('admin_training_manager_show', {'slug': training_manager.slug}) }}">Voir</a>
+                    <a class="btn btn-primary" role="button" href="{{ path('admin_training_manager_edit', {'slug': training_manager.slug}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="10">no records found</td>
+                <td colspan="10">Aucun enregistrement</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+    <div class="d-flex justify-content-center">
+        {{ knp_pagination_render(training_managers) }}
+    </div>
 
-    <a href="{{ path('admin_training_manager_new') }}">Create new</a>
+    <a class="btn btn-primary" role="button" href="{{ path('admin_training_manager_new') }}">Ajouter un responsable</a>
 {% endblock %}

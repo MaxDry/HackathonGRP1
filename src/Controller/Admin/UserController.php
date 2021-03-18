@@ -53,7 +53,7 @@ class UserController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-            $this->addFlash('success', 'Ajout réussi');
+            $this->addFlash('success', 'Ajout d\'un utilisateur réussi');
 
             return $this->redirectToRoute('admin_user_index');
         }
@@ -91,7 +91,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
             $this->getDoctrine()->getManager()->flush();
-            $this->addFlash('success', 'Modification réussie');
+            $this->addFlash('success', 'Modification d\'un utilisateur réussi');
 
             return $this->redirectToRoute('admin_user_index');
         }
@@ -113,7 +113,7 @@ class UserController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($user);
             $entityManager->flush();
-            $this->addFlash('success', 'Suppression réussie');
+            $this->addFlash('success', 'Suppression d\'un utilisateur réussi');
         }
 
         return $this->redirectToRoute('admin_user_index');

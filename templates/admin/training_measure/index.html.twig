@@ -1,45 +1,42 @@
 {% extends './admin/base.html.twig' %}
 
-{% block title %}TrainingMeasure index{% endblock %}
+{% block title %}Dispositifs de formation{% endblock %}
 
 {% block body %}
-    <h1>TrainingMeasure index</h1>
+    <h1>Dispositifs de formation</h1>
 
-    <table class="table">
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Is_active</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>CreatedBy</th>
-                <th>UpdatedBy</th>
-                <th>actions</th>
+                <th scope="col">Id</th>
+                <th scope="col">Intitulé</th>
+                <th scope="col">Actif</th>
+                <th scope="col">Créé le</th>
+                <th scope="col">actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for training_measure in training_measures %}
-            <tr>
-                <td>{{ training_measure.id }}</td>
-                <td>{{ training_measure.name }}</td>
-                <td>{{ training_measure.isActive ? 'Yes' : 'No' }}</td>
-                <td>{{ training_measure.createdAt ? training_measure.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ training_measure.updatedAt ? training_measure.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ training_measure.createdBy }}</td>
-                <td>{{ training_measure.updatedBy }}</td>
-                <td>
-                    <a href="{{ path('admin_training_measure_show', {'id': training_measure.id}) }}">show</a>
-                    <a href="{{ path('admin_training_measure_edit', {'id': training_measure.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
+            {% for training_measure in training_measures %}
+                <tr>
+                    <td scope="row">{{ training_measure.id }}</td>
+                    <td>{{ training_measure.name }}</td>
+                    <td>{{ training_measure.isActive ? 'Actif' : 'Inactif' }}</td>
+                    <td>{{ training_measure.createdAt ? training_measure.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>
+                        <a class="btn btn-primary" role="button" href="{{ path('admin_training_measure_show', {'slug': training_measure.slug}) }}">Voir</a>
+                        <a class="btn btn-primary" role="button" href="{{ path('admin_training_measure_edit', {'slug': training_measure.slug}) }}">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">Aucun enregistrement</td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
+    <div class="d-flex justify-content-center">
+        {{ knp_pagination_render(training_measures) }}
+    </div>
 
-    <a href="{{ path('admin_training_measure_new') }}">Create new</a>
+    <a class="btn btn-primary" href="{{ path('admin_training_measure_new') }}" role="button">Ajouter un dispositif</a>
 {% endblock %}

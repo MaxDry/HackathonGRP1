@@ -48,8 +48,8 @@ class User implements UserInterface
      * @Assert\Length(
      *    min = 2,
      *    max = 50,
-     *    minMessage = "Le prénom est trop petit",
-     *    maxMessage = "Le prénom est trop grand",
+     *    minMessage = "Le prénom doit faire au moins 2 caractères",
+     *    maxMessage = "Le prénom faire au maximum 50 caractères",
      * )
      */
     private $first_name;
@@ -60,8 +60,8 @@ class User implements UserInterface
      * @Assert\Length(
      *    min = 2,
      *    max = 50,
-     *    minMessage = "Le nom est trop petit",
-     *    maxMessage = "Le nom est trop long",
+     *    minMessage = "Le nom doit faire au moins 2 caractères",
+     *    maxMessage = "Le nom doit faire au maximum 50 caractères",
      * )
      */
     private $last_name;
