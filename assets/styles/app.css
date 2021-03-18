@@ -170,10 +170,12 @@ h4 {
   margin: 15px;
   border: 1px solid #000091;
   border-radius: 10px;
+  -webkit-transition: all .2s;
+  transition: all .2s;
 }
 
 .card-dispositif:hover {
-  padding: 10px;
+  padding: 9.5px;
   text-align: center;
   -webkit-box-flex: 0;
       -ms-flex: 0 0 300px;
