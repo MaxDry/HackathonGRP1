@@ -46,9 +46,9 @@
         </tbody>
     </table>
 
-    <a class="btn btn-secondary" role="button" href="{{ path('admin_training_manager_index') }}">back to list</a>
+    <a class="btn btn-secondary" role="button" href="{{ path('admin_training_manager_index') }}">Retour</a>
 
-    <a class="btn btn-primary" role="button" href="{{ path('admin_training_manager_edit', {'slug': training_manager.slug}) }}">edit</a>
+    <a class="btn btn-primary" role="button" href="{{ path('admin_training_manager_edit', {'slug': training_manager.slug}) }}">Modifier</a>
 
     {{ include('admin/training_manager/_delete_form.html.twig') }}
 {% endblock %}

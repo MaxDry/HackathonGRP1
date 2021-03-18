@@ -1,0 +1,106 @@
+.field-form{
+    margin-bottom: 40px;
+    position: relative;
+  
+    label{
+      color: black;
+      background: white;
+      position: absolute;
+      top: -15px;
+      left: 20px;
+      transition: 0.2s all ease-in-out;
+      padding: 0 4px;
+      opacity: 1;
+      z-index: 1;
+      font-weight: 800;
+      font-size: 1.2rem;
+  
+      span {
+        padding: 0 12px;
+        position: relative;
+        background: white;
+  
+        &:before {
+          position: absolute;
+          font-size: 1.6rem;
+          top: -6px;
+          left: 6px;
+        }
+  
+        &.icon_error {
+          color: red;
+        }
+  
+        &.icon_info {
+          color: green;
+        }
+      }
+    }
+  
+    .label_gender, .label_picture:not(#label_mobile){
+      position: absolute;
+      top: -13px;
+      left: 20px;
+      cursor: inherit;
+      opacity: 1;
+    }
+  
+    .field_password {
+      position: relative;
+      margin-bottom: 50px;
+    }
+  
+    #input_file_parent {
+      width: 100%;
+      background-color: transparent;
+      border: solid 1px black;
+      border-radius: 11px !important;
+      height: 6%;
+      color: black;
+  
+      #sign_up_picture {
+        width: 100%;
+        visibility: hidden;
+        height: 100%;
+      }
+    }
+  
+    input:not(#input_file_parent):not(.select-pure__autocomplete):not([type="checkbox"]):not(.qs-overlay-year), textarea {
+      background-color: transparent;
+      border: solid 1px black;
+      width: 100%;
+      border-radius: 11px !important;
+      height: 56px;
+      padding: 20px;
+      color: black;
+      transition: 0.3s border ease-in;
+    }
+  
+    textarea {
+      min-height: 200px;
+  
+      &::-webkit-scrollbar {
+        width: 0 !important
+      }
+    }
+  
+    input {
+      outline: none !important;
+      font-size: 1.6rem;
+    }
+  }
+
+  .custom-select {
+    select {
+      display: none;
+  
+      &[disabled="disabled"] ~ .select-pure__select {
+        pointer-events: none;
+        opacity: 0.4;
+  
+        .select-pure__options {
+          display: none;
+        }
+      }
+    }
+  }

@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\TrainingManager;
 use App\Entity\Team;
 use App\Entity\City;
+use App\Entity\Formation;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -52,6 +53,12 @@ class TrainingManagerType extends AbstractType
                 'label' => 'Localisation',
                 'required' => false,
                 'placeholder' => 'Aucun',
+            ])
+            ->add('formations', EntityType::class, [
+                'class' => Formation::class,
+                'label' => 'Formations',
+                'multiple' => true,
+                'attr' => ['data-search' => 'Recherche'],
             ])
         ;
     }

@@ -25,6 +25,18 @@
             {{ form_label(form.city) }}
             {{ form_widget(form.city) }}
         </div>
+        {% if form.formations is defined %}
+            <div class="field-contain-error-container">
+                <div class="field-form custom-select multiple autocomplete">
+                    <label for="training_manager_formations">
+                        {% if form_errors(form.formations) %}
+                            <span title="{{ form_errors(form.formations) }}" ></span>
+                        {% endif %}
+                    </label>
+                    {{ form_widget(form.formations) }}
+                </div>
+            </div>
+        {% endif %}
         <div class="my-2">
             <label class="switch is-active">
                 {{ form_widget(form.is_active) }}

@@ -53,6 +53,8 @@ class TrainingManagerController extends AbstractController
             $entityManager->persist($trainingManager);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Ajout d\'un responsable de formation réussi');
+
             return $this->redirectToRoute('admin_training_manager_index');
         }
 
@@ -87,6 +89,8 @@ class TrainingManagerController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'Modification d\'un responsable de formation réussi');
+
             return $this->redirectToRoute('admin_training_manager_index');
         }
 
@@ -107,6 +111,8 @@ class TrainingManagerController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($trainingManager);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Suppression d\'un dispositif de formation réussi');
         }
 
         return $this->redirectToRoute('admin_training_manager_index');

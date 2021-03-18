@@ -1,0 +1,16 @@
+{{ form_start(form) }}
+    <div class="d-flex flex-column ml-3 mb-4">
+        <div class="my-2">
+            {{ form_errors(form.name) }}
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name) }}
+        </div>
+        <div class="my-2">
+            <label class="switch is-active">
+                {{ form_widget(form.is_active) }}
+                <div class="slider"></div>
+            </label>
+        </div>
+    </div>
+    <button class="btn btn-success">{{ button_label|default('Ajouter') }}</button>
+{{ form_end(form) }}

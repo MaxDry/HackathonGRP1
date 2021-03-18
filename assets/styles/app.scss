@@ -7,4 +7,6 @@ body {
   color: $primary-color;
 }
 
+@import "./_components/select";
 @import "./_components/switch";
+@import "./_components/forms";

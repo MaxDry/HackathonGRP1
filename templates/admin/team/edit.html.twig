@@ -1,0 +1,13 @@
+{% extends './admin/base.html.twig' %}
+
+{% block title %}Modification d'une équipe{% endblock %}
+
+{% block body %}
+    <h1>Modification d'une équipe</h1>
+
+    {{ include('admin/team/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+
+    <a class="btn btn-secondary" role="button" href="{{ path('admin_team_index') }}">Retour</a>
+
+    {{ include('admin/team/_delete_form.html.twig') }}
+{% endblock %}
