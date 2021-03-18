@@ -52,8 +52,12 @@
         </tbody>
     </table>
 
+    {% if is_granted('ROLE_USER_EDIT') %}
+        <a class="btn btn-primary" href="{{ path('admin_user_edit', {'slug': user.slug}) }}" role="button">Modifier</a>
+    {% endif %}
+    
+    {% if is_granted('ROLE_USER_DELETE') %}
+        {{ include('admin/user/_delete_form.html.twig') }}
+    {% endif %}
     <a class="btn btn-secondary" href="{{ path('admin_user_index') }}" role="button">Retour</a>
-    <a class="btn btn-primary" href="{{ path('admin_user_edit', {'slug': user.slug}) }}" role="button">Modifier</a>
-
-    {{ include('admin/user/_delete_form.html.twig') }}
 {% endblock %}

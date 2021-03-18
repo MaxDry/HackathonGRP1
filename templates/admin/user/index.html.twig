@@ -31,8 +31,12 @@
               </td>
               <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
               <td>
-                  <a class="btn btn-primary" href="{{ path('admin_user_show', {'slug': user.slug}) }}" role="button">Voir</a>
-                  <a class="btn btn-primary" href="{{ path('admin_user_edit', {'slug': user.slug}) }}" role="button">Modifier</a>
+                {% if is_granted('ROLE_USER_SHOW') %}
+                    <a class="btn btn-primary" href="{{ path('admin_user_show', {'slug': user.slug}) }}" role="button">Voir</a>
+                {% endif %}
+                {% if is_granted('ROLE_USER_EDIT') %}
+                    <a class="btn btn-primary" href="{{ path('admin_user_edit', {'slug': user.slug}) }}" role="button">Modifier</a>
+                {% endif %}
               </td>
           </tr>
       {% else %}
@@ -46,5 +50,8 @@
     {{ knp_pagination_render(users) }}
   </div>
 
-  <a class="btn btn-primary" href="{{ path('admin_user_new') }}" role="button">Ajouter un Utilisateur</a>
+  {% if is_granted('ROLE_USER_NEW') %}
+      <a class="btn btn-primary" href="{{ path('admin_user_new') }}" role="button">Ajouter un Utilisateur</a>
+  {% endif %}
+  
 {% endblock %}

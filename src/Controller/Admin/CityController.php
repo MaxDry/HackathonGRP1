@@ -21,6 +21,8 @@ class CityController extends AbstractController
      */
     public function index(Request $request, PaginatorInterface $paginator, CityRepository $cityRepository): Response
     {
+        $this->denyAccessUnlessGranted('list', new City());
+
         $cities = $cityRepository->findAll();
 
         $citiesPaginate = $paginator->paginate(
@@ -40,6 +42,9 @@ class CityController extends AbstractController
     public function new(Request $request): Response
     {
         $city = new City();
+
+        $this->denyAccessUnlessGranted('create', $city);
+
         $form = $this->createForm(CityType::class, $city);
         $form->handleRequest($request);
 
@@ -64,6 +69,8 @@ class CityController extends AbstractController
      */
     public function show(City $city): Response
     {
+        $this->denyAccessUnlessGranted('show', $city);
+
         return $this->render('admin/city/show.html.twig', [
             'city' => $city,
         ]);
@@ -74,6 +81,8 @@ class CityController extends AbstractController
      */
     public function edit(Request $request, City $city): Response
     {
+        $this->denyAccessUnlessGranted('edit', $city);
+
         $form = $this->createForm(CityType::class, $city);
         $form->handleRequest($request);
 
@@ -96,6 +105,8 @@ class CityController extends AbstractController
      */
     public function delete(Request $request, City $city): Response
     {
+        $this->denyAccessUnlessGranted('delete', $city);
+
         if ($this->isCsrfTokenValid('delete'.$city->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($city);

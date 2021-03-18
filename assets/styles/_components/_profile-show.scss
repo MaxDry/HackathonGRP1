@@ -1,0 +1,44 @@
+.show-type.profiles {
+    .field-role {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+  
+      &:not(:last-child) {
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgb(227, 0, 235);
+      }
+    }
+  
+    .onglets {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      margin-top: 30px;
+  
+      .onglet {
+        padding: 5px 15px;
+        cursor: pointer;
+  
+        &.active {
+          background: purple;
+          border-top: 3px solid rgb(0, 255, 234);
+          border-top-left-radius: 5px;
+          border-top-right-radius: 5px;
+        }
+      }
+    }
+  
+    .container-roles {
+      background-color: orange;
+      padding: 25px;
+      border-radius: 5px;
+      width: 100%;
+  
+      &:not(.active) {
+        display: none;
+      }
+    }
+  }

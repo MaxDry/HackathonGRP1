@@ -3,11 +3,15 @@
 {% block title %}Modification d'une ville{% endblock %}
 
 {% block body %}
+    <a class="btn btn-secondary mb-3" role="button" href="{{ path('admin_city_index') }}">Retour</a>
     <h1>Modification d'une ville</h1>
 
     {{ include('admin/city/_form.html.twig', {'button_label': 'Enregistrer'}) }}
 
-    <a class="btn btn-secondary" role="button" href="{{ path('admin_city_index') }}">Retour</a>
-
-    {{ include('admin/city/_delete_form.html.twig') }}
+    {% if is_granted('ROLE_CITY_DELETE') %}
+        <div class="mt-3">
+            {{ include('admin/city/_delete_form.html.twig') }}
+        </div>
+    {% endif %}
+    
 {% endblock %}

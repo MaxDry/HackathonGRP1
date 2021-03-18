@@ -3,11 +3,14 @@
 {% block title %}Modification d'une équipe{% endblock %}
 
 {% block body %}
+    <a class="btn btn-secondary mb-3" role="button" href="{{ path('admin_team_index') }}">Retour</a>
     <h1>Modification d'une équipe</h1>
 
     {{ include('admin/team/_form.html.twig', {'button_label': 'Enregistrer'}) }}
 
-    <a class="btn btn-secondary" role="button" href="{{ path('admin_team_index') }}">Retour</a>
-
-    {{ include('admin/team/_delete_form.html.twig') }}
+    {% if is_granted('ROLE_TEAM_DELETE') %}
+        <div class="mt-3">
+            {{ include('admin/team/_delete_form.html.twig') }}
+        </div>
+    {% endif %}
 {% endblock %}

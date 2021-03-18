@@ -25,8 +25,12 @@
                 <td>{{ team.isActive ? 'Actif' : 'Inactif' }}</td>
                 <td>{{ team.createdAt ? team.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a class="btn btn-primary" role="button" href="{{ path('admin_team_show', {'slug': team.slug}) }}">Voir</a>
-                    <a class="btn btn-primary" role="button" href="{{ path('admin_team_edit', {'slug': team.slug}) }}">Modifier</a>
+                    {% if is_granted('ROLE_TEAM_SHOW') %}
+                        <a class="btn btn-primary" role="button" href="{{ path('admin_team_show', {'slug': team.slug}) }}">Voir</a>
+                    {% endif %}
+                    {% if is_granted('ROLE_TEAM_EDIT') %}
+                        <a class="btn btn-primary" role="button" href="{{ path('admin_team_edit', {'slug': team.slug}) }}">Modifier</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -40,5 +44,8 @@
         {{ knp_pagination_render(teams) }}
     </div>
 
-    <a class="btn btn-primary" role="button" href="{{ path('admin_team_new') }}">Ajouter une équipe</a>
+    {% if is_granted('ROLE_TEAM_NEW') %}
+        <a class="btn btn-primary" role="button" href="{{ path('admin_team_new') }}">Ajouter une équipe</a>
+    {% endif %}
+    
 {% endblock %}

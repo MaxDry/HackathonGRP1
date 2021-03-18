@@ -23,8 +23,12 @@
                     <td>{{ training_measure.isActive ? 'Actif' : 'Inactif' }}</td>
                     <td>{{ training_measure.createdAt ? training_measure.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                     <td>
-                        <a class="btn btn-primary" role="button" href="{{ path('admin_training_measure_show', {'slug': training_measure.slug}) }}">Voir</a>
-                        <a class="btn btn-primary" role="button" href="{{ path('admin_training_measure_edit', {'slug': training_measure.slug}) }}">Modifier</a>
+                        {% if is_granted('ROLE_TRAINING_MEASURE_SHOW') %}
+                            <a class="btn btn-primary" role="button" href="{{ path('admin_training_measure_show', {'slug': training_measure.slug}) }}">Voir</a>
+                        {% endif %}
+                        {% if is_granted('ROLE_TRAINING_MEASURE_EDIT') %}
+                            <a class="btn btn-primary" role="button" href="{{ path('admin_training_measure_edit', {'slug': training_measure.slug}) }}">Modifier</a>
+                        {% endif %}
                     </td>
                 </tr>
             {% else %}
@@ -38,5 +42,8 @@
         {{ knp_pagination_render(training_measures) }}
     </div>
 
-    <a class="btn btn-primary" href="{{ path('admin_training_measure_new') }}" role="button">Ajouter un dispositif</a>
+    {% if is_granted('ROLE_TRAINING_MEASURE_NEW') %}
+        <a class="btn btn-primary" href="{{ path('admin_training_measure_new') }}" role="button">Ajouter un dispositif</a>
+    {% endif %}
+    
 {% endblock %}

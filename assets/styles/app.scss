@@ -7,6 +7,42 @@ body {
   color: $primary-color;
 }
 
+h1 {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.content-body {
+  padding: 2rem 6rem;
+
+  .table {
+    margin: 2rem 0 !important;
+  }
+}
+
+input,select {
+  height: 33px;
+  border-radius: 5px;
+  border: 1px solid gray;
+  margin-left: 6px;
+  padding-left: 7px;
+
+  &:focus{
+    height: 33px;
+    border-radius: 5px;
+    border: 1px solid gray !important;
+    margin-left: 6px;
+    outline: none;
+  }
+}
+
+
+
+
+@import "./_partials/media_queries";
+@import "./_components/select";
+@import "./_components/profile-form";
+@import "./_components/profile-show";
 @import "./_components/select";
 @import "./_components/switch";
 @import "./_components/forms";

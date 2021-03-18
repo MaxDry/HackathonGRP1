@@ -1,0 +1,51 @@
+{% extends './admin/base.html.twig' %}
+
+{% block title %}Profil {{ profile.name }}{% endblock %}
+
+{% block body %}
+    <h1>Profil {{ profile.name }}</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ profile.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ profile.name }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ profile.isActive ? 'Actif' : 'Inactif' }}</td>
+            </tr>
+            <tr>
+                <th>Créé le</th>
+                <td>{{ profile.createdAt ? profile.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Modifié le</th>
+                <td>{{ profile.updatedAt ? profile.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Créé par</th>
+                <td>{{ profile.createdBy }}</td>
+            </tr>
+            <tr>
+                <th>Modifié par</th>
+                <td>{{ profile.updatedBy }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-secondary" role="button" href="{{ path('admin_profile_index') }}">Retour</a>
+    
+    {% if is_granted('ROLE_PROFILE_EDIT') %}
+        <a class="btn btn-primary" role="button" href="{{ path('admin_profile_edit', {'slug': profile.slug}) }}">Modifier</a>
+    {% endif %}
+    
+    {% if is_granted('ROLE_PROFILE_DELETE') %}
+        {{ include('admin/profile/_delete_form.html.twig') }}
+    {% endif %}
+
+{% endblock %}

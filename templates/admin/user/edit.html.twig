@@ -3,11 +3,15 @@
 {% block title %}Modification d'un utilisateur{% endblock %}
 
 {% block body %}
+    <a class="btn btn-secondary mb-3" role="button" href="{{ path('admin_user_index') }}">Retour</a>
     <h1>Modification d'un utilisateur</h1>
 
     {{ include('admin/user/_form.html.twig', {'button_label': 'Enregistrer'}) }}
 
-    <a class="btn btn-secondary" href="{{ path('admin_user_index') }}" role="button">Retour</a>
+    {% if is_granted('ROLE_USER_DELETE') %}
+        <div class="mt-3">
+            {{ include('admin/user/_delete_form.html.twig') }}
+        </div>
+    {% endif %}
 
-    {{ include('admin/user/_delete_form.html.twig') }}
 {% endblock %}

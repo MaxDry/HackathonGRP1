@@ -31,8 +31,12 @@
                 <td>{{ training_manager.isActive ? 'Actif' : 'Inactif' }}</td>
                 <td>{{ training_manager.createdAt ? training_manager.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a class="btn btn-primary" role="button" href="{{ path('admin_training_manager_show', {'slug': training_manager.slug}) }}">Voir</a>
-                    <a class="btn btn-primary" role="button" href="{{ path('admin_training_manager_edit', {'slug': training_manager.slug}) }}">Modifier</a>
+                    {% if is_granted('ROLE_TRAINING_MANAGER_SHOW') %}
+                        <a class="btn btn-primary" role="button" href="{{ path('admin_training_manager_show', {'slug': training_manager.slug}) }}">Voir</a>
+                    {% endif %}
+                    {% if is_granted('ROLE_TRAINING_MANAGER_EDIT') %}
+                        <a class="btn btn-primary" role="button" href="{{ path('admin_training_manager_edit', {'slug': training_manager.slug}) }}">Modifier</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -46,5 +50,8 @@
         {{ knp_pagination_render(training_managers) }}
     </div>
 
-    <a class="btn btn-primary" role="button" href="{{ path('admin_training_manager_new') }}">Ajouter un responsable</a>
+    {% if is_granted('ROLE_TRAINING_MANAGER_NEW') %}
+        <a class="btn btn-primary" role="button" href="{{ path('admin_training_manager_new') }}">Ajouter un responsable</a>
+    {% endif %}
+    
 {% endblock %}

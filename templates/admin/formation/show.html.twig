@@ -47,7 +47,13 @@
     </table>
 
     <a class="btn btn-secondary" href="{{ path('admin_formation_index') }}" role="button">Retour</a>
-    <a class="btn btn-primary" href="{{ path('admin_formation_edit', {'slug': formation.slug}) }}" role="button">Modifier</a>
 
-    {{ include('admin/formation/_delete_form.html.twig') }}
+    {% if is_granted('ROLE_FORMATION_EDIT') %}
+        <a class="btn btn-primary" href="{{ path('admin_formation_edit', {'slug': formation.slug}) }}" role="button">Modifier</a>
+    {% endif %}
+    
+    {% if is_granted('ROLE_FORMATION_DELETE') %}
+        {{ include('admin/formation/_delete_form.html.twig') }}
+    {% endif %}
+    
 {% endblock %}

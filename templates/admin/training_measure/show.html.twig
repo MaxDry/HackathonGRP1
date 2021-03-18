@@ -38,8 +38,14 @@
         </tbody>
     </table>
 
-    <a class="btn btn-secondary" role="button" href="{{ path('admin_training_measure_index') }}">Retour</a>
-    <a class="btn btn-primary" role="button" href="{{ path('admin_training_measure_edit', {'slug': training_measure.slug}) }}">Modifier</a>
+    {% if is_granted('ROLE_TRAINING_MEASURE_EDIT') %}
+        <a class="btn btn-primary" role="button" href="{{ path('admin_training_measure_edit', {'slug': training_measure.slug}) }}">Modifier</a>
+    {% endif %}
+    
+    {% if is_granted('ROLE_TRAINING_MEASURE_DELETE') %}
+        {{ include('admin/training_measure/_delete_form.html.twig') }}
+    {% endif %}
 
-    {{ include('admin/training_measure/_delete_form.html.twig') }}
+    <a class="btn btn-secondary" role="button" href="{{ path('admin_training_measure_index') }}">Retour</a>
+    
 {% endblock %}

@@ -3,11 +3,15 @@
 {% block title %}Modification d'une formation{% endblock %}
 
 {% block body %}
+    <a class="btn btn-secondary mb-3" role="button" href="{{ path('admin_formation_index') }}">Retour</a>
     <h1>Modification d'une formation</h1>
 
     {{ include('admin/formation/_form.html.twig', {'button_label': 'Enregistrer'}) }}
 
-    <a class="btn btn-secondary" href="{{ path('admin_formation_index') }}" role="button">Retour</a>
-
-    {{ include('admin/formation/_delete_form.html.twig') }}
+    {% if is_granted('ROLE_FORMATION_DELETE') %}
+        <div class="mt-3">
+            {{ include('admin/formation/_delete_form.html.twig') }}
+        </div>
+    {% endif %}
+    
 {% endblock %}
