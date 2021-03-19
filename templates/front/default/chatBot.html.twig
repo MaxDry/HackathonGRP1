@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ChatBot{% endblock %}
+{% block classNameBody %}chatBot-body{% endblock %}
+{% block body %}
+<section class="chatbot-section">
+    <div class="bot-part row">
+        <div class="col-4">
+   
+        </div>
+        <div class="col-4">
+            <div class="content-bot">
+                <img class="bot" src="{{ asset('build/images/chatBot/1.png') }}" alt="">
+                <img class="tache-bot" src="{{ asset('build/images/tache.png') }}" alt="">
+            </div>
+        </div>
+        <div class="col-4">
+           
+        </div>
+    </div>
+    <div class="questions-part">
+        <div class="question">
+        
+            {% for question in questions %}
+                {% if question.id == originalQuestion %}
+                    <span>{{question.message}}</span>
+                {% else %}
+                    <span id="question-{{question.id}}" class="d-none">{{question.message}}</span>
+                {% endif %}
+            {% endfor %}
+        </div>
+            
+        <div class="responses row">
+            {% for response in responses %}
+                {% if response.previousQuestion.id == originalQuestion %}
+                    {% if response.nextQuestion is null %}
+                        <a class="end response-{{response.previousQuestion.id}}" role="button" onclick="refreshBot(this)" target="_blank" href="{{response.link}}"><span>{{response.message}}</span></a>
+                    {% else %}
+                        <a id="response-question-{{response.nextQuestion.id}}" class="response-{{response.previousQuestion.id}}" class="question-{{response.nextQuestion.id}}" role="button" onclick="refreshBot(this)"><span>{{response.message}}</span></a>
+                    {% endif %}
+                {% else %}
+                    {% if response.nextQuestion is null %}
+                        <a class="d-none end response-{{response.previousQuestion.id}}" role="button" onclick="refreshBot(this)" target="_blank" href="{{response.link}}"><span>{{response.message}}</span></a>
+                    {% else %}
+                        <a id="response-question-{{response.nextQuestion.id}}" class="d-none response-{{response.previousQuestion.id}}" role="button" onclick="refreshBot(this)"><span>{{response.message}}</span></a>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+    <script>
+        function refreshBot($this) {
+
+            //Get target question
+            var targetQuestion = document.getElementById($this.id.slice(9));
+            
+            //Get target question's parent
+            if(targetQuestion != null){
+                var questionParentNode = targetQuestion.parentNode;
+
+                //d-none all questions and Display my target question
+                questionParentNode.children.forEach(element => element.classList.add("d-none"))
+                targetQuestion.classList.remove("d-none")
+
+                //Get number Id on Target Element
+                var targetQuestionId = 'response-'+targetQuestion.id.slice(9)
+
+                var elements = document.getElementsByClassName(targetQuestionId);
+
+                elements[0].parentNode.children.forEach(element => element.classList.add("d-none"));
+
+                elements.forEach(element => element.classList.remove("d-none"));
+            }else{
+                console.log($this);
+            }
+            
+        }
+    </script>
+{% endblock %}

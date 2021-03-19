@@ -34,6 +34,11 @@ class Response
      */
     private $message;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $link;
+
     use TimestampableEntity;
     use BlameableEntity;
 
@@ -74,6 +79,18 @@ class Response
     public function setMessage(string $message): self
     {
         $this->message = $message;
+
+        return $this;
+    }
+
+    public function getLink(): ?string
+    {
+        return $this->link;
+    }
+
+    public function setLink(?string $link): self
+    {
+        $this->link = $link;
 
         return $this;
     }

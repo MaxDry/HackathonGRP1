@@ -37,21 +37,25 @@ class ChatBotFixtures extends BaseFixtures
         $response2 = new Response();
         $response2->setMessage("Pour acquérir des compétences en lien avec mon poste de travail actuel");
         $response2->setPreviousQuestion($question1);
+        $response2->setLink("https://www.google.com");
         $manager->persist($response2);
 
         $response3 = new Response();
         $response3->setMessage("Pour me réorienter professionnellement");
         $response3->setPreviousQuestion($question1);
+        $response3->setLink("https://www.google.com");
         $manager->persist($response3);
 
         $response4 = new Response();
         $response4->setMessage("Changer de métier");
         $response4->setPreviousQuestion($question2);
+        $response4->setLink("https://www.google.com");
         $manager->persist($response4);
 
         $response5 = new Response();
         $response5->setMessage("Changer de grade ou de corps");
         $response5->setPreviousQuestion($question2);
+        $response5->setLink("https://www.google.com");
         $manager->persist($response5);
 
         $manager->persist($question);
