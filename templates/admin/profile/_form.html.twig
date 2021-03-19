@@ -1,0 +1,36 @@
+{{ form_start(form, {'attr': {'class': 'form-type', 'novalidate': 'novalidate'}}) }}
+    <div class="d-flex flex-column ml-3 mb-4">
+        <div class="my-2">
+            {{ form_errors(form.name) }}
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name) }}
+        </div>
+        <div class="my-2">
+            <label class="switch is-active">
+                {{ form_widget(form.is_active) }}
+                <div class="slider"></div>
+            </label>
+        </div>
+        <div class="onglets">
+            {% set i = 0 %}
+            {% for key, roles in roleTypes %}
+                <div class="onglet{% if i == 0%} active{% endif %}" data-name="{{ key }}">{{ key }}</div>
+                {% set i = i + 1 %}
+            {% endfor %}
+        </div>
+        {% for key, roles in roleTypes %}
+            <div class="container-roles {{ key }}">
+            {% for role in roles %}
+                <div class="field-role">
+                    {{ form_label(attribute(form, role)) }}
+                    <label class="switch">
+                        {{ form_widget(attribute(form, role)) }}
+                        <div class="slider"></div>
+                    </label>
+                </div>
+            {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+    <button class="btn btn-success">{{ button_label|default('Ajouter') }}</button>
+{{ form_end(form) }}

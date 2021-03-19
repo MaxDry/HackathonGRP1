@@ -1,0 +1,68 @@
+
+
+  
+    .field-contain-error-container {
+      width: 100%;
+      padding: 25px;
+      background: transparent;
+      border-radius: 5px;
+  
+      .field-form {
+        margin-bottom: 0;
+      }
+    }
+  
+    .field-role {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+  
+      &:not(:last-child) {
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid gray;
+      }
+    }
+  
+    .onglets {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      margin-top: 30px;
+  
+      .onglet {
+        padding: 5px 15px;
+        cursor: pointer;
+  
+        &.active {
+          background: rgb(240, 240, 240);
+          border-top: 3px solid rgb(31, 66, 160);
+          border-top-left-radius: 5px;
+          border-top-right-radius: 5px;
+        }
+      }
+    }
+  
+    .container-roles {
+      background-color: rgb(247, 247, 247);
+      padding: 25px;
+      border-radius: 5px;
+      width: 800px;
+  
+      &:not(.active) {
+        display: none;
+      }
+    }
+
+    @include below(md) {
+        .switch.is-active {
+          margin: 25px 0 0;
+        }
+    
+        .submit {
+          margin: 20px 0;
+        }
+      }
+  
+    

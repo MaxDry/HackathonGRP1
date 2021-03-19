@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/formation")
@@ -18,12 +19,20 @@ class FormationController extends AbstractController
     /**
      * @Route("/", name="formation_index", methods={"GET"})
      */
-    public function index(FormationRepository $formationRepository): Response
+    public function index(Request $request, PaginatorInterface $paginator, FormationRepository $formationRepository): Response
     {
         $this->denyAccessUnlessGranted('list', new Formation());
 
+        $formations = $formationRepository->findAll();
+
+        $formationsPaginate = $paginator->paginate(
+            $formations,
+            $request->query->getInt('page', 1),
+            6
+        );
+
         return $this->render('admin/formation/index.html.twig', [
-            'formations' => $formationRepository->findAll(),
+            'formations' => $formationsPaginate,
         ]);
     }
 
@@ -43,6 +52,8 @@ class FormationController extends AbstractController
             $entityManager->persist($formation);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Ajout d\'une formation réussie');
+
             return $this->redirectToRoute('admin_formation_index');
         }
 
@@ -53,7 +64,7 @@ class FormationController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="formation_show", methods={"GET"})
+     * @Route("/{slug}", name="formation_show", methods={"GET"})
      */
     public function show(Formation $formation): Response
     {
@@ -65,7 +76,7 @@ class FormationController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="formation_edit", methods={"GET","POST"})
+     * @Route("/{slug}/edit", name="formation_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Formation $formation): Response
     {
@@ -76,6 +87,8 @@ class FormationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash('success', 'Modification d\'une formation réussie');
 
             return $this->redirectToRoute('admin_formation_index');
         }
@@ -97,6 +110,8 @@ class FormationController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($formation);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Suppression d\'une formation réussie');
         }
 
         return $this->redirectToRoute('admin_formation_index');

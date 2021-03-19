@@ -1,11 +1,11 @@
-{% extends 'base.html.twig' %}
+{% extends './admin/base.html.twig' %}
 
-{% block title %}New TrainingManager{% endblock %}
+{% block title %}Ajout d'un responsable de formation{% endblock %}
 
 {% block body %}
-    <h1>Create new TrainingManager</h1>
+    <h1>Ajout d'un responsable de formation</h1>
 
     {{ include('admin/training_manager/_form.html.twig') }}
 
-    <a href="{{ path('admin_training_manager_index') }}">back to list</a>
+    <a class="btn btn-secondary" role="button" href="{{ path('admin_training_manager_index') }}">Retour</a>
 {% endblock %}

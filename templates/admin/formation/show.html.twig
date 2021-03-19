@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends './admin/base.html.twig' %}
 
 {% block title %}Formation{% endblock %}
 
@@ -12,43 +12,48 @@
                 <td>{{ formation.id }}</td>
             </tr>
             <tr>
-                <th>Name</th>
+                <th>Intitulé</th>
                 <td>{{ formation.name }}</td>
             </tr>
             <tr>
-                <th>Catalog_link</th>
+                <th>Lien du catalogue</th>
                 <td>{{ formation.catalogLink }}</td>
             </tr>
             <tr>
-                <th>ELearning_link</th>
+                <th>Lien E-Learning</th>
                 <td>{{ formation.eLearningLink }}</td>
             </tr>
             <tr>
-                <th>Is_active</th>
+                <th>Status</th>
                 <td>{{ formation.isActive ? 'Yes' : 'No' }}</td>
             </tr>
             <tr>
-                <th>CreatedAt</th>
+                <th>Créé le</th>
                 <td>{{ formation.createdAt ? formation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>UpdatedAt</th>
+                <th>Modifié le</th>
                 <td>{{ formation.updatedAt ? formation.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>CreatedBy</th>
+                <th>Créé par</th>
                 <td>{{ formation.createdBy }}</td>
             </tr>
             <tr>
-                <th>UpdatedBy</th>
+                <th>Modifié par</th>
                 <td>{{ formation.updatedBy }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('admin_formation_index') }}">back to list</a>
+    <a class="btn btn-secondary" href="{{ path('admin_formation_index') }}" role="button">Retour</a>
 
-    <a href="{{ path('admin_formation_edit', {'id': formation.id}) }}">edit</a>
-
-    {{ include('admin/formation/_delete_form.html.twig') }}
+    {% if is_granted('ROLE_FORMATION_EDIT') %}
+        <a class="btn btn-primary" href="{{ path('admin_formation_edit', {'slug': formation.slug}) }}" role="button">Modifier</a>
+    {% endif %}
+    
+    {% if is_granted('ROLE_FORMATION_DELETE') %}
+        {{ include('admin/formation/_delete_form.html.twig') }}
+    {% endif %}
+    
 {% endblock %}

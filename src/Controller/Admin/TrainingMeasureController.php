@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/training/measure")
@@ -18,10 +19,18 @@ class TrainingMeasureController extends AbstractController
     /**
      * @Route("/", name="training_measure_index", methods={"GET"})
      */
-    public function index(TrainingMeasureRepository $trainingMeasureRepository): Response
+    public function index(Request $request, PaginatorInterface $paginator, TrainingMeasureRepository $trainingMeasureRepository): Response
     {
+        $training_measures = $trainingMeasureRepository->findAll();
+
+        $training_measuresPaginate = $paginator->paginate(
+            $training_measures,
+            $request->query->getInt('page', 1),
+            6
+        );
+
         return $this->render('admin/training_measure/index.html.twig', [
-            'training_measures' => $trainingMeasureRepository->findAll(),
+            'training_measures' => $training_measuresPaginate,
         ]);
     }
 
@@ -38,6 +47,7 @@ class TrainingMeasureController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($trainingMeasure);
             $entityManager->flush();
+            $this->addFlash('success', 'Ajout d\'un dispositif de formation réussi');
 
             return $this->redirectToRoute('admin_training_measure_index');
         }
@@ -49,7 +59,7 @@ class TrainingMeasureController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="training_measure_show", methods={"GET"})
+     * @Route("/{slug}", name="training_measure_show", methods={"GET"})
      */
     public function show(TrainingMeasure $trainingMeasure): Response
     {
@@ -59,7 +69,7 @@ class TrainingMeasureController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="training_measure_edit", methods={"GET","POST"})
+     * @Route("/{slug}/edit", name="training_measure_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, TrainingMeasure $trainingMeasure): Response
     {
@@ -68,6 +78,7 @@ class TrainingMeasureController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', 'Modification d\'un dispositif de formation réussi');
 
             return $this->redirectToRoute('admin_training_measure_index');
         }
@@ -87,6 +98,7 @@ class TrainingMeasureController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($trainingMeasure);
             $entityManager->flush();
+            $this->addFlash('Suppression', 'Ajout d\'un dispositif de formation réussi');
         }
 
         return $this->redirectToRoute('admin_training_measure_index');

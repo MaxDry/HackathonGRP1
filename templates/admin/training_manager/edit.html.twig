@@ -1,13 +1,17 @@
-{% extends 'base.html.twig' %}
+{% extends './admin/base.html.twig' %}
 
-{% block title %}Edit TrainingManager{% endblock %}
+{% block title %}Modification d'un responsable de formation{% endblock %}
 
 {% block body %}
-    <h1>Edit TrainingManager</h1>
+    <a class="btn btn-secondary mb-3" role="button" href="{{ path('admin_training_manager_index') }}">Retour</a>
+    <h1>Modification d'un responsable de formation</h1>
 
-    {{ include('admin/training_manager/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('admin/training_manager/_form.html.twig', {'button_label': 'Enregistrer'}) }}
 
-    <a href="{{ path('admin_training_manager_index') }}">back to list</a>
+    {% if is_granted('ROLE_TRAINING_MANAGER_DELETE') %}
+        <div class="mt-3">
+            {{ include('admin/training_manager/_delete_form.html.twig') }}
+        </div>
+    {% endif %}
 
-    {{ include('admin/training_manager/_delete_form.html.twig') }}
 {% endblock %}

@@ -1,0 +1,17 @@
+{% extends './admin/base.html.twig' %}
+
+{% block title %}Modification d'un profil{% endblock %}
+
+{% block body %}
+    <a class="btn btn-secondary mb-3" role="button" href="{{ path('admin_profile_index') }}">Retour</a>
+    <h1>Modification d'un profil</h1>
+
+    {{ include('admin/profile/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+
+    {% if is_granted('ROLE_PROFILE_DELETE') %}
+        <div class="mt-3">
+            {{ include('admin/profile/_delete_form.html.twig') }}
+        </div>
+    {% endif %}
+    
+{% endblock %}

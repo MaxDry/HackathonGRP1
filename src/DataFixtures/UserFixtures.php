@@ -35,8 +35,8 @@ class UserFixtures extends BaseFixtures implements DependentFixtureInterface
         $user = new User();
         $user->setEmail("utilisateur@gmail.com");
         $user->setPassword($this->passwordEncoder->encodePassword($user, "azerty"));
-        $user->setFirstName("Maxime");
-        $user->setLastName("DUROYON");
+        $user->setFirstName("Frank");
+        $user->setLastName("DUPONT");
         $user->setPicture($this->faker->imageUrl($width = 70, $height = 70));
         $user->setProfile($this->repository->findAdminProfile());
         $user->setIsActive(true);

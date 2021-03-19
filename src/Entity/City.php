@@ -6,7 +6,9 @@ use App\Repository\CityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Blameable\Traits\BlameableEntity;
 
 /**
@@ -23,6 +25,13 @@ class City
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le nom de ville ne peut pas être vide")
+     * @Assert\Length(
+     *    min = 2,
+     *    max = 50,
+     *    minMessage = "Le nom de ville doit faire au moins 2 caractères",
+     *    maxMessage = "Le nom de ville faire au maximum 50 caractères",
+     * )
      */
     private $name;
 
@@ -35,6 +44,12 @@ class City
      * @ORM\Column(type="boolean")
      */
     private $is_active;
+
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(type="string", unique=true)
+     */
+    private $slug;
 
     use TimestampableEntity;
     use BlameableEntity;
@@ -106,5 +121,17 @@ class City
     public function __toString()
     {
        return $this->name;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 }

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+    <i class="bi bi-alarm-fill"></i>
+        <nav class="mb-4 navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="px-5 navbar-brand" href="#">ADMIN</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    {% if is_granted('ROLE_USER') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('admin_user_index') }}">Utilisateurs</a>
+                        </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_PROFILE') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('admin_profile_index') }}">Profils</a>
+                        </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_TEAM') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('admin_team_index') }}">Équipes</a>
+                        </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_FORMATION') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('admin_formation_index') }}">Formations</a>
+                        </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_CITY') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('admin_city_index') }}">Villes</a>
+                        </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_TRAINING_MANAGER') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('admin_training_manager_index') }}">Responsables de formations</a>
+                        </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_TRAINING_MEASURE') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('admin_training_measure_index') }}">Dispositifs de formations</a>
+                        </li>
+                    {% endif %}
+                    
+                    <li class="ml-5 nav-item active">
+                        <a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }}" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+        <div class="content-body">
+            {% block body %}{% endblock %}
+        </div>
+        
+        {% block javascripts %}
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </body>
+</html>

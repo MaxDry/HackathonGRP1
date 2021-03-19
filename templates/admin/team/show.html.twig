@@ -1,0 +1,58 @@
+{% extends './admin/base.html.twig' %}
+
+{% block title %}Équipe {{ team.name }}{% endblock %}
+
+{% block body %}
+    <h1>Équipe {{ team.name }}</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ team.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom d'équipe</th>
+                <td>{{ team.name }}</td>
+            </tr>
+            <tr>
+                <th>Photo</th>
+                <td>{{ team.picture }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ team.isActive ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Créé le</th>
+                <td>{{ team.createdAt ? team.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Modifié le</th>
+                <td>{{ team.updatedAt ? team.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Créé par</th>
+                <td>{{ team.createdBy }}</td>
+            </tr>
+            <tr>
+                <th>Modifié par</th>
+                <td>{{ team.updatedBy }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    {% if is_granted('ROLE_TEAM_EDIT') %}
+        <a class="btn btn-primary" role="button" href="{{ path('admin_team_edit', {'slug': team.slug}) }}">Modifier</a>
+    {% endif %}
+    
+    {% if is_granted('ROLE_TEAM_DELETE') %}
+        {{ include('admin/team/_delete_form.html.twig') }}
+    {% endif %}
+
+    <a class="btn btn-secondary" role="button" href="{{ path('admin_team_index') }}">Retour</a>
+
+    
+
+    
+{% endblock %}

@@ -6,6 +6,8 @@ use App\Repository\FormationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Gedmo\Blameable\Traits\BlameableEntity;
 
@@ -23,16 +25,29 @@ class Formation
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le nom ne peut pas être vide")
+     * @Assert\Length(
+     *    min = 2,
+     *    max = 50,
+     *    minMessage = "Le nom doit faire au moins 2 caractères",
+     *    maxMessage = "Le nom doit faire au maximum 50 caractères",
+     * )
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url(
+     *    message = "L'url '{{ value }}' n'est pas une url valide",
+     * )
      */
     private $catalog_link;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url(
+     *    message = "L'url '{{ value }}' n'est pas une url valide",
+     * )
      */
     private $eLearning_link;
 
@@ -45,6 +60,12 @@ class Formation
      * @ORM\ManyToMany(targetEntity=TrainingManager::class, mappedBy="formations")
      */
     private $trainingManagers;
+
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(type="string", unique=true)
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -132,5 +153,22 @@ class Formation
         }
 
         return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+       return $this->name;
     }
 }

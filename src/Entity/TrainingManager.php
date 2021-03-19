@@ -6,6 +6,8 @@ use App\Repository\TrainingManagerRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Gedmo\Blameable\Traits\BlameableEntity;
 
@@ -23,16 +25,36 @@ class TrainingManager
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le prénom ne peut pas être vide")
+     * @Assert\Length(
+     *    min = 2,
+     *    max = 50,
+     *    minMessage = "Le prénom doit faire au moins 2 caractères",
+     *    maxMessage = "Le prénom faire au maximum 50 caractères",
+     * )
      */
     private $first_name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(message="le nom de famille ne peut pas être vide")
+     * @Assert\Length(
+     *    min = 2,
+     *    max = 50,
+     *    minMessage = "Le nom doit faire au moins 2 caractères",
+     *    maxMessage = "Le nom doit faire au maximum 50 caractères",
+     * )
      */
     private $last_name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le champ ne peut pas être vide")
+     * @Assert\Length(
+     *    max = 50,
+     *    maxMessage = "L'email est trop long",
+     * )
+     * @Assert\Email(message = "L'email est invalide")
      */
     private $email;
 
@@ -55,6 +77,12 @@ class TrainingManager
      * @ORM\ManyToMany(targetEntity=Formation::class, inversedBy="trainingManagers")
      */
     private $formations;
+
+    /**
+     * @Gedmo\Slug(fields={"first_name"})
+     * @ORM\Column(type="string", unique=true)
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -168,5 +196,17 @@ class TrainingManager
     public function __toString()
     {
        return $this->label;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 }

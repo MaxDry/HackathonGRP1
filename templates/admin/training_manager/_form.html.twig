@@ -1,4 +1,48 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <div class="d-flex flex-column ml-3 mb-4">
+        <div class="my-2">
+            {{ form_errors(form.first_name) }}
+            {{ form_label(form.first_name) }}
+            {{ form_widget(form.first_name) }}
+        </div>
+        <div class="my-2">
+            {{ form_errors(form.last_name) }}
+            {{ form_label(form.last_name) }}
+            {{ form_widget(form.last_name) }}
+        </div>
+        <div class="my-2">
+            {{ form_errors(form.email) }}
+            {{ form_label(form.email) }}
+            {{ form_widget(form.email) }}
+        </div>
+        <div class="my-2">
+            {{ form_errors(form.team) }}
+            {{ form_label(form.team) }}
+            {{ form_widget(form.team) }}
+        </div>
+        <div class="my-2">
+            {{ form_errors(form.city) }}
+            {{ form_label(form.city) }}
+            {{ form_widget(form.city) }}
+        </div>
+        {% if form.formations is defined %}
+            <div class="field-contain-error-container">
+                <div class="field-form custom-select multiple autocomplete">
+                    <label for="training_manager_formations">
+                        {% if form_errors(form.formations) %}
+                            <span title="{{ form_errors(form.formations) }}" ></span>
+                        {% endif %}
+                    </label>
+                    {{ form_widget(form.formations) }}
+                </div>
+            </div>
+        {% endif %}
+        <div class="my-2">
+            <label class="switch is-active">
+                {{ form_widget(form.is_active) }}
+                <div class="slider"></div>
+            </label>
+        </div>
+    </div>
+    <button class="btn btn-success">{{ button_label|default('Ajouter') }}</button>
 {{ form_end(form) }}

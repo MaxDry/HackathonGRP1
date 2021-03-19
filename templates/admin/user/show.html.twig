@@ -1,9 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends './admin/base.html.twig' %}
 
-{% block title %}User{% endblock %}
+{% block title %}Utilisateur {{ user.firstName }}{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
+    <h1>Utilisateur {{ user.firstName }}</h1>
 
     <table class="table">
         <tbody>
@@ -16,15 +16,11 @@
                 <td>{{ user.email }}</td>
             </tr>
             <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
-                <th>First_name</th>
+                <th>Prénom</th>
                 <td>{{ user.firstName }}</td>
             </tr>
             <tr>
-                <th>Last_name</th>
+                <th>Nom</th>
                 <td>{{ user.lastName }}</td>
             </tr>
             <tr>
@@ -32,27 +28,36 @@
                 <td>{{ user.picture }}</td>
             </tr>
             <tr>
-                <th>CreatedAt</th>
+                <th>Status</th>
+                <td>
+                    {{ user.isActive ? 'Actif' : 'Inactif' }}
+                </td>
+            </tr>
+            <tr>
+                <th>Créé le</th>
                 <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>UpdatedAt</th>
+                <th>Modifié le</th>
                 <td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>CreatedBy</th>
+                <th>Créé par</th>
                 <td>{{ user.createdBy }}</td>
             </tr>
             <tr>
-                <th>UpdatedBy</th>
+                <th>Modifié par</th>
                 <td>{{ user.updatedBy }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('admin_user_index') }}">back to list</a>
-
-    <a href="{{ path('admin_user_edit', {'id': user.id}) }}">edit</a>
-
-    {{ include('admin/user/_delete_form.html.twig') }}
+    {% if is_granted('ROLE_USER_EDIT') %}
+        <a class="btn btn-primary" href="{{ path('admin_user_edit', {'slug': user.slug}) }}" role="button">Modifier</a>
+    {% endif %}
+    
+    {% if is_granted('ROLE_USER_DELETE') %}
+        {{ include('admin/user/_delete_form.html.twig') }}
+    {% endif %}
+    <a class="btn btn-secondary" href="{{ path('admin_user_index') }}" role="button">Retour</a>
 {% endblock %}

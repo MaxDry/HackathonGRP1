@@ -1,51 +1,57 @@
-{% extends 'base.html.twig' %}
+{% extends './admin/base.html.twig' %}
 
-{% block title %}User index{% endblock %}
+{% block title %}Utilisateurs{% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
+  <h1>Utilisateurs</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Password</th>
-                <th>First_name</th>
-                <th>Last_name</th>
-                <th>Picture</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>CreatedBy</th>
-                <th>UpdatedBy</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.password }}</td>
-                <td>{{ user.firstName }}</td>
-                <td>{{ user.lastName }}</td>
-                <td>{{ user.picture }}</td>
-                <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ user.createdBy }}</td>
-                <td>{{ user.updatedBy }}</td>
-                <td>
-                    <a href="{{ path('admin_user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('admin_user_edit', {'id': user.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="11">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Email</th>
+        <th scope="col">Prénom</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Status</th>
+        <th scope="col">Profile</th>
+        <th scope="col">Date de création</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+          <tr>
+              <td scope="row">{{ user.id }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.firstName }}</td>
+              <td>{{ user.lastName }}</td>
+              <td>{{ user.profile }}</td>
+              <td>
+                  {{ user.isActive ? 'Actif' : 'Inactif' }}
+              </td>
+              <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+              <td>
+                {% if is_granted('ROLE_USER_SHOW') %}
+                    <a class="btn btn-primary" href="{{ path('admin_user_show', {'slug': user.slug}) }}" role="button">Voir</a>
+                {% endif %}
+                {% if is_granted('ROLE_USER_EDIT') %}
+                    <a class="btn btn-primary" href="{{ path('admin_user_edit', {'slug': user.slug}) }}" role="button">Modifier</a>
+                {% endif %}
+              </td>
+          </tr>
+      {% else %}
+          <tr>
+              <td colspan="11">Aucun enregistrement</td>
+          </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-center">
+    {{ knp_pagination_render(users) }}
+  </div>
 
-    <a href="{{ path('admin_user_new') }}">Create new</a>
+  {% if is_granted('ROLE_USER_NEW') %}
+      <a class="btn btn-primary" href="{{ path('admin_user_new') }}" role="button">Ajouter un Utilisateur</a>
+  {% endif %}
+  
 {% endblock %}

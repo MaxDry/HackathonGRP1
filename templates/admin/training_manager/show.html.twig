@@ -1,9 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends './admin/base.html.twig' %}
 
-{% block title %}TrainingManager{% endblock %}
+{% block title %}Responsable de formation {{ training_manager.firstName }}{% endblock %}
 
 {% block body %}
-    <h1>TrainingManager</h1>
+    <h1>Responsable de formation {{ training_manager.firstName }}</h1>
 
     <table class="table">
         <tbody>
@@ -12,11 +12,11 @@
                 <td>{{ training_manager.id }}</td>
             </tr>
             <tr>
-                <th>First_name</th>
+                <th>Prénom</th>
                 <td>{{ training_manager.firstName }}</td>
             </tr>
             <tr>
-                <th>Last_name</th>
+                <th>Nom</th>
                 <td>{{ training_manager.lastName }}</td>
             </tr>
             <tr>
@@ -24,31 +24,35 @@
                 <td>{{ training_manager.email }}</td>
             </tr>
             <tr>
-                <th>Is_active</th>
+                <th>Status</th>
                 <td>{{ training_manager.isActive ? 'Yes' : 'No' }}</td>
             </tr>
             <tr>
-                <th>CreatedAt</th>
+                <th>Créé le</th>
                 <td>{{ training_manager.createdAt ? training_manager.createdAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>UpdatedAt</th>
+                <th>Modifié le</th>
                 <td>{{ training_manager.updatedAt ? training_manager.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>CreatedBy</th>
+                <th>Créé par</th>
                 <td>{{ training_manager.createdBy }}</td>
             </tr>
             <tr>
-                <th>UpdatedBy</th>
+                <th>Modifié par</th>
                 <td>{{ training_manager.updatedBy }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('admin_training_manager_index') }}">back to list</a>
+    {% if is_granted('ROLE_TRAINING_MANAGER_EDIT') %}
+        <a class="btn btn-primary" role="button" href="{{ path('admin_training_manager_edit', {'slug': training_manager.slug}) }}">Modifier</a>
+    {% endif %}
+    
+    {% if is_granted('ROLE_TRAINING_MANAGER_DELETE') %}
+        {{ include('admin/training_manager/_delete_form.html.twig') }}
+    {% endif %}
 
-    <a href="{{ path('admin_training_manager_edit', {'id': training_manager.id}) }}">edit</a>
-
-    {{ include('admin/training_manager/_delete_form.html.twig') }}
+    <a class="btn btn-secondary" role="button" href="{{ path('admin_training_manager_index') }}">Retour</a>
 {% endblock %}

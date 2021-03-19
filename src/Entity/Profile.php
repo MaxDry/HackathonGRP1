@@ -6,6 +6,8 @@ use App\Repository\ProfileRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Gedmo\Blameable\Traits\BlameableEntity;
 
@@ -15,19 +17,26 @@ use Gedmo\Blameable\Traits\BlameableEntity;
 class Profile
 {
     public const ROLES = [
-        'user' => [
+        'utilisateur' => [
             'ROLE_USER',
             'ROLE_USER_SHOW',
             'ROLE_USER_NEW',
             'ROLE_USER_EDIT',
             'ROLE_USER_DELETE',
         ],
-        'profile' => [
+        'profil' => [
             'ROLE_PROFILE',
             'ROLE_PROFILE_SHOW',
             'ROLE_PROFILE_NEW',
             'ROLE_PROFILE_EDIT',
             'ROLE_PROFILE_DELETE',
+        ],
+        'team' => [
+            'ROLE_TEAM',
+            'ROLE_TEAM_SHOW',
+            'ROLE_TEAM_NEW',
+            'ROLE_TEAM_EDIT',
+            'ROLE_TEAM_DELETE',
         ],
         'formation' => [
             'ROLE_FORMATION',
@@ -35,6 +44,13 @@ class Profile
             'ROLE_FORMATION_NEW',
             'ROLE_FORMATION_EDIT',
             'ROLE_FORMATION_DELETE',
+        ],
+        'city' => [
+            'ROLE_CITY',
+            'ROLE_CITY_SHOW',
+            'ROLE_CITY_NEW',
+            'ROLE_CITY_EDIT',
+            'ROLE_CITY_DELETE',
         ],
         'trainingManager' => [
             'ROLE_TRAINING_MANAGER',
@@ -61,6 +77,13 @@ class Profile
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="le nom de famille ne peut pas être vide")
+     * @Assert\Length(
+     *    min = 2,
+     *    max = 50,
+     *    minMessage = "Le nom doit faire au moins 2 caractères",
+     *    maxMessage = "Le nom doit faire au maximum 50 caractères",
+     * )
      */
     private $name;
 
@@ -78,6 +101,12 @@ class Profile
      * @ORM\Column(type="boolean")
      */
     private $is_active;
+
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(type="string", unique=true)
+     */
+    private $slug;
 
     use TimestampableEntity;
     use BlameableEntity;
@@ -154,6 +183,23 @@ class Profile
     public function setIsActive(bool $is_active): self
     {
         $this->is_active = $is_active;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+       return $this->name;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
