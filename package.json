@@ -3,6 +3,7 @@
         "@symfony/stimulus-bridge": "^2.0.0",
         "@symfony/webpack-encore": "^1.0.0",
         "bootstrap": "^4.6.0",
+        "copy-webpack-plugin": "^8.0.0",
         "core-js": "^3.0.0",
         "regenerator-runtime": "^0.13.2",
         "sass": "^1.32.8",
@@ -21,7 +22,6 @@
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^1.2.35",
         "bootstrap-icons": "^1.4.0",
-        "copy-webpack-plugin": "^8.0.0",
         "select-pure": "^0.6.1"
     }
 }

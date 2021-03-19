@@ -27,12 +27,14 @@
         </div>
         {% if form.formations is defined %}
             <div class="field-contain-error-container">
+            {{ form_label(form.formations) }}
                 <div class="field-form custom-select multiple autocomplete">
                     <label for="training_manager_formations">
                         {% if form_errors(form.formations) %}
                             <span title="{{ form_errors(form.formations) }}" ></span>
                         {% endif %}
                     </label>
+                    
                     {{ form_widget(form.formations) }}
                 </div>
             </div>
